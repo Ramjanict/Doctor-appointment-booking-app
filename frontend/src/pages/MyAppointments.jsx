@@ -73,7 +73,8 @@ const MyAppointments = () => {
         { headers: { token } }
       );
       if (data.session) {
-        console.log("id", data.id);
+        console.log("id", data.session.id);
+        stripe.redirectToCheckout(data.session.id);
       }
       // console.log("data", data);
       // console.log("id", data.id);
