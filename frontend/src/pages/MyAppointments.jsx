@@ -74,7 +74,7 @@ const MyAppointments = () => {
       );
       if (data.session) {
         console.log("daataaaa", data.session.id);
-        stripe.redirectToCheckout({ sessionId: data.session.id });
+        return stripe.redirectToCheckout({ sessionId: data.session.id });
       }
       // console.log("data", data);
       // console.log("id", data.id);
