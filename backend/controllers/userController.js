@@ -218,7 +218,6 @@ const stripePayment = async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       submit_type: "pay",
       mode: "payment",
-      payment_method_types: ["card"],
       billing_address_collection: "auto",
       customer_email: appointmentData.userData.email,
       line_items: [
