@@ -72,8 +72,11 @@ const MyAppointments = () => {
         { appointmentId },
         { headers: { token } }
       );
-      console.log("data", data);
-      console.log("data", data.session);
+      if (data.session) {
+        console.log("id", data.id);
+      }
+      // console.log("data", data);
+      // console.log("id", data.id);
     } catch (error) {
       toast.error(error.message);
     }
