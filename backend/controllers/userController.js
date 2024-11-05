@@ -207,7 +207,7 @@ const cancelAppointment = async (req, res) => {
 const stripePayment = async (req, res) => {
   try {
     const { userId, appointmentId } = req.body;
-    const appointmentData = await appointmentModel.findById(appointmentId);
+    const appointmentData = await appointmentModel.findOne(appointmentId);
 
     //verify appointment user
     if (appointmentData.userId !== userId) {
