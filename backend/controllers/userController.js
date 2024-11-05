@@ -214,12 +214,13 @@ const stripePayment = async (req, res) => {
       return res.json({ success: false, message: "Unauthorized action" });
     }
 
-    console.log("appointmentData", appointmentData);
-    const session = await stripe.checkout.sessions.create({
+    const params = {
       submit_type: "pay",
       mode: "payment",
+      payment_method_types: ["card"],
       billing_address_collection: "auto",
       customer_email: appointmentData.userData.email,
+
       line_items: [
         {
           price_data: {
@@ -231,20 +232,17 @@ const stripePayment = async (req, res) => {
                 productId: appointmentData._id,
               },
             },
-            unit_amount: appointmentData.amount,
+            unit_amount: appointmentData.amount * 100,
           },
-          adjustable_quantity: {
-            enabled: true,
-            minimum: 1,
-          },
-          quantity: 1,
         },
       ],
 
       success_url: `${process.env.FRONTEND_URL}/success`,
       cancel_url: `${process.env.FRONTEND_URL}/cancel`,
-    });
-    console.log("session", session);
+    };
+
+    const session = await stripe.checkout.sessions.create(params);
+
     res.status(400).json({ session });
   } catch (error) {
     console.log("error", error);
