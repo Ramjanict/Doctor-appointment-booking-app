@@ -221,21 +221,19 @@ const stripePayment = async (req, res) => {
       billing_address_collection: "auto",
       customer_email: appointmentData.userData.email,
 
-      line_items: [
-        {
-          price_data: {
-            currency: "usd",
-            product_data: {
-              name: appointmentData.docData.name,
-              images: appointmentData.docData.image,
-              metadata: {
-                productId: appointmentData._id,
-              },
+      line_items: {
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: appointmentData.docData.name,
+            images: appointmentData.docData.image,
+            metadata: {
+              productId: appointmentData._id,
             },
-            unit_amount: appointmentData.amount * 100,
           },
+          unit_amount: appointmentData.amount * 100,
         },
-      ],
+      },
 
       success_url: `${process.env.FRONTEND_URL}/success`,
       cancel_url: `${process.env.FRONTEND_URL}/cancel`,
