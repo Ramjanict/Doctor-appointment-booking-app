@@ -213,7 +213,6 @@ const stripePayment = async (req, res) => {
     if (appointmentData.userId !== userId) {
       return res.json({ success: false, message: "Unauthorized action" });
     }
-
     const params = {
       submit_type: "pay",
       mode: "payment",
@@ -221,20 +220,26 @@ const stripePayment = async (req, res) => {
       billing_address_collection: "auto",
       customer_email: appointmentData.userData.email,
 
-      line_items: {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: appointmentData.docData.name,
-            images: appointmentData.docData.image,
-            metadata: {
-              productId: appointmentData._id,
+      line_items: [appointmentData].map((item, index) => {
+        return {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: item.docData.name,
+              images: item.docData.image,
+              metadata: {
+                productId: item._id,
+              },
             },
+            unit_amount: item.amount * 100,
           },
-          unit_amount: appointmentData.amount * 100,
-        },
-      },
-
+          adjustable_quantity: {
+            enabled: true,
+            minimum: 1,
+          },
+          quantity: 1,
+        };
+      }),
       success_url: `${process.env.FRONTEND_URL}/success`,
       cancel_url: `${process.env.FRONTEND_URL}/cancel`,
     };
