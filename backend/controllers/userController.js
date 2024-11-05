@@ -207,44 +207,33 @@ const cancelAppointment = async (req, res) => {
 const stripePayment = async (req, res) => {
   try {
     const { userId, appointmentId } = req.body;
-    const appointmentData = await appointmentModel.findOne(appointmentId);
+    const appointmentData = await appointmentModel.findById(appointmentId);
 
     //verify appointment user
     if (appointmentData.userId !== userId) {
       return res.json({ success: false, message: "Unauthorized action" });
     }
-    const params = {
+    const params = {};
+
+    const session = await stripe.checkout.sessions.create({
       submit_type: "pay",
       mode: "payment",
       payment_method_types: ["card"],
       billing_address_collection: "auto",
       customer_email: appointmentData.userData.email,
-
-      line_items: [appointmentData].map((item, index) => {
-        return {
+      line_items: [
+        {
           price_data: {
             currency: "usd",
-            product_data: {
-              name: item.docData.name,
-              images: item.docData.image,
-              metadata: {
-                productId: item._id,
-              },
-            },
-            unit_amount: item.amount * 100,
+            unit_amount: appointmentData.amount * 100,
+            product_data: { name: appointmentData.docData.name },
           },
-          adjustable_quantity: {
-            enabled: true,
-            minimum: 1,
-          },
-          quantity: 1,
-        };
-      }),
+        },
+      ],
+
       success_url: `${process.env.FRONTEND_URL}/success`,
       cancel_url: `${process.env.FRONTEND_URL}/cancel`,
-    };
-
-    const session = await stripe.checkout.sessions.create(params);
+    });
 
     res.status(400).json({ session });
   } catch (error) {
