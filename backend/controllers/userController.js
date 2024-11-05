@@ -234,7 +234,7 @@ const stripePayment = async (req, res) => {
       cancel_url: `${process.env.FRONTEND_URL}/cancel`,
     });
 
-    res.status(400).json({ session });
+    res.json({ session });
   } catch (error) {
     console.log("error", error);
     res.json({ success: false, message: error.message });
