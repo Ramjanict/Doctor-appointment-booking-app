@@ -213,8 +213,6 @@ const stripePayment = async (req, res) => {
     if (appointmentData.userId !== userId) {
       return res.json({ success: false, message: "Unauthorized action" });
     }
-    const params = {};
-
     const session = await stripe.checkout.sessions.create({
       submit_type: "pay",
       mode: "payment",
@@ -228,6 +226,7 @@ const stripePayment = async (req, res) => {
             unit_amount: appointmentData.amount * 100,
             product_data: { name: appointmentData.docData.name },
           },
+          quantity: 1,
         },
       ],
 
