@@ -99,7 +99,7 @@ const appointmentCancel = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-//API for get doctor dashboard data  for specific  doctor
+//API for get doctor dashboard data
 const doctorDashboard = async (req, res) => {
   try {
     const { docId } = req.body;
