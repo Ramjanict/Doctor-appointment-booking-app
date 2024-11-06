@@ -134,7 +134,7 @@ const Appointment = () => {
 
   useEffect(() => {
     fetchDocInfo();
-  }, [docId, docInfo]);
+  }, [doctors, docId]);
 
   useEffect(() => {
     getAvailableSlots();
