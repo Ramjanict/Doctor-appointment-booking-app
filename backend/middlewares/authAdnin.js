@@ -3,11 +3,10 @@ import jwt from "jsonwebtoken";
 // admin authentication middleware
 const authAdnin = async (req, res, next) => {
   try {
-    const { aToken } = req.headers;
+    const { atoken } = req.headers;
 
-    console.log("aToken", aToken);
     //if admin token not available
-    if (!aToken) {
+    if (!atoken) {
       return res.json(
         res.json({
           success: false,
@@ -16,7 +15,7 @@ const authAdnin = async (req, res, next) => {
       );
     }
     // decode token
-    const decode_token = jwt.verify(aToken, process.env.JWT_SECRET);
+    const decode_token = jwt.verify(atoken, process.env.JWT_SECRET);
     if (decode_token !== process.env.ADMIN_EMAIL + process.env.ADMIN_PASSWORd) {
       return res.json(
         res.json({

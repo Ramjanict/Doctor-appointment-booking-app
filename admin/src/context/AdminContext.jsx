@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 export const AdminContext = createContext();
 
 const AdimContextProvider = ({ children }) => {
-  const [aToken, setAToken] = useState(
-    localStorage.getItem("aToken") ? localStorage.getItem("aToken") : ""
+  const [atoken, setatoken] = useState(
+    localStorage.getItem("atoken") ? localStorage.getItem("atoken") : ""
   );
   const [doctors, setDoctors] = useState([]);
   const [appointments, setAppointments] = useState([]);
@@ -17,7 +17,7 @@ const AdimContextProvider = ({ children }) => {
       const { data } = await axios.post(
         backendUrl + "/api/admin/all-doctors",
         {},
-        { headers: { aToken } }
+        { headers: { atoken } }
       );
       if (data.success) {
         setDoctors(data.doctors);
@@ -33,7 +33,7 @@ const AdimContextProvider = ({ children }) => {
       const { data } = await axios.post(
         backendUrl + "/api/admin/change-availablity",
         { docId },
-        { headers: { aToken } }
+        { headers: { atoken } }
       );
       if (data.success) {
         toast.success(data.message);
@@ -48,7 +48,7 @@ const AdimContextProvider = ({ children }) => {
   const getAllAppointments = async () => {
     try {
       const { data } = await axios.get(backendUrl + "/api/admin/appointments", {
-        headers: { aToken },
+        headers: { atoken },
       });
       if (data.success) {
         setAppointments(data.appointmens);
@@ -62,7 +62,7 @@ const AdimContextProvider = ({ children }) => {
   const getDashboardData = async () => {
     try {
       const { data } = await axios.get(backendUrl + "/api/admin/dashboard", {
-        headers: { aToken },
+        headers: { atoken },
       });
       if (data.success) {
         setDashboardData(data.dashData);
@@ -78,7 +78,7 @@ const AdimContextProvider = ({ children }) => {
       const { data } = await axios.post(
         backendUrl + "/api/admin/cancel-appointment",
         { appointmentId },
-        { headers: { aToken } }
+        { headers: { atoken } }
       );
       if (data.success) {
         toast.success(data.message);
@@ -93,8 +93,8 @@ const AdimContextProvider = ({ children }) => {
   };
 
   const value = {
-    aToken,
-    setAToken,
+    atoken,
+    setatoken,
     backendUrl,
     doctors,
     getAllDoctors,

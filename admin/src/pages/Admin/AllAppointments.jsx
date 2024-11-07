@@ -5,17 +5,17 @@ import { AppContext } from "../../context/AppContext";
 import { assets } from "../../assets/assets";
 
 const AllAppointments = () => {
-  const { aToken, appointments, getAllAppointments, cancelAppointment } =
+  const { atoken, appointments, getAllAppointments, cancelAppointment } =
     useContext(AdminContext);
   const { calculateAge, sloteDateFormate, currency } = useContext(AppContext);
 
   useEffect(() => {
-    if (aToken) {
+    if (atoken) {
       getAllAppointments();
     }
-  }, [aToken]);
+  }, [atoken]);
 
-  console.log("aToken", aToken);
+  console.log("atoken", atoken);
 
   return (
     <div className="w-full max-w-6xl m-5">

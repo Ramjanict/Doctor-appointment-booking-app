@@ -3,10 +3,10 @@ import jwt from "jsonwebtoken";
 // Doctor authentication middleware
 const authDoctor = async (req, res, next) => {
   try {
-    const { dToken } = req.headers;
+    const { dtoken } = req.headers;
 
     //if user token not available
-    if (!dToken) {
+    if (!dtoken) {
       return res.json(
         res.json({
           success: false,
@@ -15,7 +15,7 @@ const authDoctor = async (req, res, next) => {
       );
     }
     // decode token
-    const decode_token = jwt.verify(dToken, process.env.JWT_SECRET);
+    const decode_token = jwt.verify(dtoken, process.env.JWT_SECRET);
     req.body.docId = decode_token.id;
     next();
   } catch (error) {

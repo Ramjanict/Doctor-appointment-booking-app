@@ -5,7 +5,7 @@ import { AppContext } from "../../context/AppContext";
 
 const DoctorDashboard = () => {
   const {
-    dToken,
+    dtoken,
     dashData,
     getDashData,
     CompleteAppointment,
@@ -13,10 +13,10 @@ const DoctorDashboard = () => {
   } = useContext(DoctorContext);
   const { sloteDateFormate, currency } = useContext(AppContext);
   useEffect(() => {
-    if (dToken) {
+    if (dtoken) {
       getDashData();
     }
-  }, [dToken]);
+  }, [dtoken]);
   console.log("dashData", dashData);
   return (
     dashData && (

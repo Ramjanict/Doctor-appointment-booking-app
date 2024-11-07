@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const DoctorProfile = () => {
-  const { dToken, profileData, setProfileData, getProfileData, backendUrl } =
+  const { dtoken, profileData, setProfileData, getProfileData, backendUrl } =
     useContext(DoctorContext);
   const { currency } = useContext(AppContext);
   const [isedit, setIsedit] = useState(false);
@@ -22,7 +22,7 @@ const DoctorProfile = () => {
       const { data } = await axios.post(
         backendUrl + "/api/doctor/update-profile",
         updateData,
-        { headers: { dToken } }
+        { headers: { dtoken } }
       );
       if (data.success) {
         toast.success(data.message);
@@ -36,10 +36,10 @@ const DoctorProfile = () => {
     }
   };
   useEffect(() => {
-    if (dToken) {
+    if (dtoken) {
       getProfileData();
     }
-  }, [dToken]);
+  }, [dtoken]);
 
   return (
     profileData && (
