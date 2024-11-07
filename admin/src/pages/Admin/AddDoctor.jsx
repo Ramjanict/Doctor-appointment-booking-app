@@ -42,7 +42,6 @@ const AddDoctor = () => {
         formData,
         { headers: { aToken } }
       );
-      console.log("data", data);
       if (data.success) {
         toast.success(data.message);
         setDocImg(false);
