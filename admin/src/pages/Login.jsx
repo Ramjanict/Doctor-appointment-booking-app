@@ -76,10 +76,7 @@ const Login = () => {
             id="password"
           />
         </div>
-        <button
-          type="submit"
-          className="w-full bg-primary text-white rounded-md text-base py-2"
-        >
+        <button className="w-full bg-primary text-white rounded-md text-base py-2">
           Login
         </button>
         {state === "Admin" ? (
