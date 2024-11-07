@@ -5,6 +5,7 @@ const authAdnin = async (req, res, next) => {
   try {
     const { aToken } = req.headers;
 
+    console.log("aToken", aToken);
     //if admin token not available
     if (!aToken) {
       return res.json(
