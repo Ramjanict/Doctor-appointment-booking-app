@@ -3,8 +3,6 @@ import { AdminContext } from "../../context/AdminContext";
 import { useEffect } from "react";
 import { AppContext } from "../../context/AppContext";
 import { assets } from "../../assets/assets";
-import axios from "axios";
-import { toast } from "react-toastify";
 
 const AllAppointments = () => {
   const { aToken, appointments, getAllAppointments, cancelAppointment } =
@@ -16,6 +14,8 @@ const AllAppointments = () => {
       getAllAppointments();
     }
   }, [aToken]);
+
+  console.log("aToken", aToken);
 
   return (
     <div className="w-full max-w-6xl m-5">
