@@ -10,7 +10,7 @@ const authAdnin = async (req, res, next) => {
       return res.json(
         res.json({
           success: false,
-          message: "Not Authorized login again",
+          message: "Not Authorized login and no token",
         })
       );
     }
