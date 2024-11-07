@@ -8,8 +8,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { setAToken, backendUrl } = useContext(AdminContext);
-  const { setDToken } = useContext(DoctorContext);
+  const { setAtoken, backendUrl } = useContext(AdminContext);
+  const { setDtoken } = useContext(DoctorContext);
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -20,8 +20,8 @@ const Login = () => {
         });
 
         if (data.success) {
-          localStorage.setItem("aToken", data.token);
-          setAToken(data.token);
+          localStorage.setItem("atoken", data.token);
+          setAtoken(data.token);
         } else {
           toast.error(data.message);
         }
@@ -31,8 +31,8 @@ const Login = () => {
           password,
         });
         if (data.success) {
-          localStorage.setItem("dToken", data.token);
-          setDToken(data.token);
+          localStorage.setItem("dtoken", data.token);
+          setDtoken(data.token);
         } else {
           toast.error(data.message);
         }

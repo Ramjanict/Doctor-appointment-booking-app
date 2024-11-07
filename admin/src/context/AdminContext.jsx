@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 export const AdminContext = createContext();
 
 const AdimContextProvider = ({ children }) => {
-  const [atoken, setatoken] = useState(
+  const [atoken, setAtoken] = useState(
     localStorage.getItem("atoken") ? localStorage.getItem("atoken") : ""
   );
   const [doctors, setDoctors] = useState([]);
@@ -94,7 +94,7 @@ const AdimContextProvider = ({ children }) => {
 
   const value = {
     atoken,
-    setatoken,
+    setAtoken,
     backendUrl,
     doctors,
     getAllDoctors,
