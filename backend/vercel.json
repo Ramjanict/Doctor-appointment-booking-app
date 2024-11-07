@@ -3,7 +3,7 @@
   "name": "Doctor appointment booking app",
   "builds": [
     {
-      "src": "./index.js",
+      "src": "*.js",
       "use": "@vercel/node"
     }
   ],
