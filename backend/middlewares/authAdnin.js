@@ -16,7 +16,7 @@ const authAdnin = async (req, res, next) => {
     }
     // decode token
     const decode_token = jwt.verify(atoken, process.env.JWT_SECRET);
-    if (decode_token !== process.env.ADMIN_EMAIL + process.env.ADMIN_PASSWORd) {
+    if (decode_token !== process.env.ADMIN_EMAIL) {
       return res.json(
         res.json({
           success: false,

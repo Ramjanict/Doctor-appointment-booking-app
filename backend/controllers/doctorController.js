@@ -121,7 +121,6 @@ const doctorDashboard = async (req, res) => {
       }
     });
 
-    console.log("patients", patients);
     const dashData = {
       earning,
       appointments: appointments.length,
