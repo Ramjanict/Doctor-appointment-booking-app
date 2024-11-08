@@ -1,11 +1,16 @@
 {
   "version": 2,
-  "name": "Doctor appointment",
+  "name": "Full Stack",
   "builds": [
     {
       "src": "./index.js",
       "use": "@vercel/node"
     }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
 }
