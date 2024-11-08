@@ -249,6 +249,30 @@ const stripePayment = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+const webhook = (req, res) => {
+  const sig = req.headers["stripe-signature"];
+
+  let event;
+
+  try {
+    event = stripe.webhooks.constructEvent(
+      req.body,
+      sig,
+      process.env.WEBHOOK_SECRET
+    );
+  } catch (err) {
+    response.status(400).send(`Webhook Error: ${err.message}`);
+    return;
+  }
+
+  // Handle the event
+  console.log(`Unhandled event type ${event.type}`);
+
+  // Return a 200 response to acknowledge receipt of the event
+  res.send();
+};
+
 export {
   registerUser,
   loginUser,
@@ -258,4 +282,5 @@ export {
   listAppointment,
   cancelAppointment,
   stripePayment,
+  webhook,
 };

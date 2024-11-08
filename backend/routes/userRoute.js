@@ -8,6 +8,7 @@ import {
   registerUser,
   stripePayment,
   updateProfile,
+  webhook,
 } from "../controllers/userController.js";
 import authUser from "../middlewares/authUser.js";
 import upload from "../middlewares/multer.js";
@@ -20,6 +21,7 @@ userRouter.post("/book-appointment", authUser, bookAppointment);
 userRouter.get("/appointments", authUser, listAppointment);
 userRouter.post("/cancel-appointment", authUser, cancelAppointment);
 userRouter.post("/checkout", authUser, stripePayment);
+userRouter.post("/webhook", webhook);
 
 userRouter.post(
   "/update-profile",
