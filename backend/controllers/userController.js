@@ -226,7 +226,7 @@ const stripePayment = async (req, res) => {
             unit_amount: appointmentData.amount * 100,
             product_data: {
               name: appointmentData.docData.name,
-              images: appointmentData.docData.image,
+              image: appointmentData.docData.image,
             },
           },
           quantity: 1,
