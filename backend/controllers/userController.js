@@ -224,7 +224,10 @@ const stripePayment = async (req, res) => {
           price_data: {
             currency: "usd",
             unit_amount: appointmentData.amount * 100,
-            product_data: { name: appointmentData.docData.name },
+            product_data: {
+              name: appointmentData.docData.name,
+              images: appointmentData.docData.image,
+            },
           },
           quantity: 1,
         },
