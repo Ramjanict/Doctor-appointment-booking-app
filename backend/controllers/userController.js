@@ -250,8 +250,8 @@ const stripePayment = async (req, res) => {
   }
 };
 
-const webhook = (req, res) => {
-  const sig = req.headers["stripe-signature"];
+const webhook = async (req, res) => {
+  const sig = request.headers["stripe-signature"];
 
   let event;
 
@@ -262,17 +262,25 @@ const webhook = (req, res) => {
       process.env.WEBHOOK_SECRET
     );
   } catch (err) {
-    response.status(400).send(`Webhook Error: ${err.message}`);
-    return;
+    return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
   // Handle the event
-  console.log(`Unhandled event type ${event.type}`);
+  switch (event.type) {
+    case "checkout.session.completed":
+      const checkoutSessionCompleted = event.data.object;
+      if (checkoutSessionCompleted) {
+        res.json({ success: true, message: "you made a purchase" });
+      }
+
+      break;
+    default:
+      console.log(`Unhandled event type ${event.type}`);
+  }
 
   // Return a 200 response to acknowledge receipt of the event
   res.send();
 };
-
 export {
   registerUser,
   loginUser,

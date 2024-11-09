@@ -21,7 +21,7 @@ userRouter.post("/book-appointment", authUser, bookAppointment);
 userRouter.get("/appointments", authUser, listAppointment);
 userRouter.post("/cancel-appointment", authUser, cancelAppointment);
 userRouter.post("/checkout", authUser, stripePayment);
-userRouter.post("/webhook", webhook);
+userRouter.post("/purchase-confirm", webhook);
 
 userRouter.post(
   "/update-profile",
